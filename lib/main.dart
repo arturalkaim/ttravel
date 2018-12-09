@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:map_view/map_view.dart';
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
+
+void main() {
+  MapView.setApiKey("AIzaSyBYrOjhuW81AnY_hxLTkYWiAVJhK8CilZk");
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'T-Travel'),
     );
   }
 }
@@ -43,8 +49,25 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  var _mapView = new MapView();
+
+  @protected
+  @mustCallSuper
+  void initState() {
+    _mapView.onLocationUpdated
+     .listen((location) => print("Location updated $location"));
+    //2. Listen for the onMapReady
+
+    _mapView.onToolbarAction.listen((id) {
+      if (id == 1) {
+        _mapView.dismiss();
+      }
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -57,8 +80,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void showMap() {
+    _mapView.show(
+        new MapOptions(
+            mapViewType: MapViewType.normal,
+            showUserLocation: true,
+            initialCameraPosition: new CameraPosition(
+                new Location(45.5235258, -122.6732493), 14.0),
+            title: "Recently Visited"),
+        toolbarActions: [new ToolbarAction("Close", 1)]);
+  }
+
   @override
   Widget build(BuildContext context) {
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -95,16 +130,18 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button:',
             ),
             Text(
-              '$_counter times',
+              '$_counter times ',
               style: Theme.of(context).textTheme.display1,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: showMap,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Text(
+              'ME',
+            ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
