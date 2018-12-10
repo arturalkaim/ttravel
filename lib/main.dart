@@ -4,7 +4,7 @@ import 'package:map_view/map_view.dart';
 // void main() => runApp(MyApp());
 
 void main() {
-  MapView.setApiKey("AIzaSyBYrOjhuW81AnY_hxLTkYWiAVJhK8CilZk");
+  MapView.setApiKey("---");
   runApp(new MyApp());
 }
 
