@@ -53,11 +53,51 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _selectedIndex = 0;
+  final _widgetOptions = [
+    Text('Index 0: Home'),
+    Text('Index 1: Business'),
+    Text('Index 2: School'),
+  ];
+  List<Widget> _children = [];
 
+  void _onMapCreated(GoogleMapController controller) {
+    setState(() { mapController = controller; });
+  }
 
   @protected
   @mustCallSuper
   void initState() {
+    _children = [
+      Padding(
+        padding: EdgeInsets.only(top: 2.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: _onMapCreated,
+                options: GoogleMapOptions(mapType: MapType.hybrid, cameraPosition: CameraPosition(
+                  bearing: 0.0,
+                  target: LatLng(40.5160895, -8.1294527),
+                  tilt: 0.0,
+                  zoom: 6.0,
+                ),),
+                // mapType: MapType.satellite
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.all(50.0),
+        child: Text("POTATO")
+      ),
+      Padding(
+        padding: EdgeInsets.all(50.0),
+        child: Text("POTATO")
+      ),
+    ];
   }
 
   void _incrementCounter() {
@@ -75,41 +115,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Center(
-            child: SizedBox(
-              width: 300.0,
-              height: 550.0,
-              child: GoogleMap(
-                onMapCreated: _onMapCreated,
-                options: GoogleMapOptions(mapType: MapType.hybrid),
-                // mapType: MapType.satellite
-              ),
-            ),
-          ),
-          RaisedButton(
-            child: const Text('Go to Europe!'),
-            onPressed: mapController == null ? null : () {
-              mapController.animateCamera(CameraUpdate.newCameraPosition(
-                const CameraPosition(
-                  bearing: 0.0,
-                  target: LatLng(51.5160895, 8.1294527),
-                  tilt: 0.0,
-                  zoom: 3.0,
-                ),
-              ));
-            },
-          ),
+    return Scaffold(
+      body: _children[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+          BottomNavigationBarItem(icon: Icon(Icons.business), title: Text('Business')),
+          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('School')),
         ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.deepPurple,
+        onTap: _onItemTapped,
       ),
     );
+
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() { mapController = controller; });
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
+
 }
