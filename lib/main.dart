@@ -55,9 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
   final _widgetOptions = [
-    Text('Index 0: Home'),
-    Text('Index 1: Business'),
-    Text('Index 2: School'),
+    Text('Index 0: Login'),
+    Text('Index 1: Map'),
+    Text('Index 2: Business'),
+    Text('Index 3: School'),
   ];
   List<Widget> _children = [];
 
@@ -69,6 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @mustCallSuper
   void initState() {
     _children = [
+      Padding(
+          padding: EdgeInsets.all(50.0),
+          child: Text("LOGIN")
+      ),
       Padding(
         padding: EdgeInsets.only(top: 2.0),
         child: Column(
