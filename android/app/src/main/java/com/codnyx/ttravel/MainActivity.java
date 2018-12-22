@@ -1,4 +1,4 @@
-package com.example.ttravel;
+package com.codnyx.ttravel;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
