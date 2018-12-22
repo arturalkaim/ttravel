@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "314652533280",
+    "firebase_url": "https://ttravel-1fe31.firebaseio.com",
+    "project_id": "ttravel-1fe31",
+    "storage_bucket": "ttravel-1fe31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314652533280:android:f220472472a91e09",
+        "android_client_info": {
+          "package_name": "com.codnyx.ttravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314652533280-pp2hcq9r61cq5mev7b6kin38kl9orl77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQMDu2V4QYeTwMx_bk883TN_vvXa0JL64"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
