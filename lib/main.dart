@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'login.dart';
 
 // void main() => runApp(MyApp());
 
@@ -54,12 +54,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
-  final _widgetOptions = [
-    Text('Index 0: Login'),
-    Text('Index 1: Map'),
-    Text('Index 2: Business'),
-    Text('Index 3: School'),
-  ];
   List<Widget> _children = [];
 
   void _onMapCreated(GoogleMapController controller) {
@@ -70,12 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @mustCallSuper
   void initState() {
     _children = [
+      LoginPage(title: "LOGIN",),
       Padding(
-          padding: EdgeInsets.all(50.0),
-          child: Text("LOGIN")
-      ),
-      Padding(
-        padding: EdgeInsets.only(top: 2.0),
+        padding: EdgeInsets.only(top: 0.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -124,13 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _children[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(icon: Icon(Icons.business), title: Text('Business')),
-          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text('School')),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), title: Text('M')),
+          BottomNavigationBarItem(icon: Icon(Icons.map), title: Text('Map')),
+          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Me')),
+          BottomNavigationBarItem(icon: Icon(Icons.zoom_out_map), title: Text('Find')),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepPurple,
         onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed
       ),
     );
 
